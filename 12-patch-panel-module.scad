@@ -10,6 +10,8 @@ keystone_wall_depth = 1.50;
 
 depth = 10;
 
+cable_holder_width = 40;
+
 
 module keystone_hole(length = keystone_length, width = keystone_width, depth = 20) {    
     cube([length, width, depth]);
@@ -61,10 +63,6 @@ module patch_panel() {
    } // end differene
 } // end module
 
-difference() {
-    patch_panel();
-    translate([0, 19+20 , 0])
-    cube([one_unit_width, one_unit_lenght, depth]);
-    translate([0, 0 , 0])
-    cube([one_unit_width, 19, depth]);
-}
+
+patch_panel();
+
