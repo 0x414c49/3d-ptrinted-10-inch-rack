@@ -12,6 +12,8 @@ depth = 10;
 
 cable_holder_width = 40;
 
+module_counts = 12;
+
 
 module keystone_hole(length = keystone_length, width = keystone_width, depth = 20) {    
     cube([length, width, depth]);
@@ -19,13 +21,15 @@ module keystone_hole(length = keystone_length, width = keystone_width, depth = 2
 
 module keystone_holes(padding_length = 3, start_with = holder_width) {
     keystone_gap = (
-        (one_unit_lenght - holder_width* 2) - (keystone_width * 12 ) - padding_length
-    ) / 12;
-    
-    for (i = [0: 11]){              
+        (one_unit_lenght - holder_width* 2) - (keystone_width * module_counts )
+    ) / module_counts;
+        
+    for (i = [0: module_counts-1]){              
         gap = keystone_gap * i; 
-
-        keystone_y_position = start_with + gap + keystone_gap + (i * keystone_width) ;
+        
+        padding_gap = keystone_gap / 2;
+                
+        keystone_y_position = start_with + gap + padding_gap + (i * keystone_width) ;
         
         // front hole
         translate([keystone_x_position , keystone_y_position, 0]) 
@@ -65,4 +69,3 @@ module patch_panel() {
 
 
 patch_panel();
-
